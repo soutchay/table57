@@ -37,6 +37,7 @@ router.route("/renter")
         if(error) {console.log(error);}
         response.status(200).json(data);
     });
+    response.render('./views')
   })
   .post(function(request, response){
     console.log(request);
