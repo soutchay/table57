@@ -99,9 +99,9 @@ router.route("/index")
         if(error) {console.log(error);}
         console.log(data);
         response.status(200).render("index", {
-            assessmentId: assessmentId
+            assessmentId: assessmentId,
+            data: data
         });
-        // response.render('index');
     });
   })
   .post(function(request, response){
@@ -109,9 +109,21 @@ router.route("/index")
     var renter = new Renter();
     renter.name = request.body.name;
     renter.assessmentId = request.body.assessmentId;
+    renter.description = request.body.description;
+    renter.property1 = request.body.property1;
+    renter.property2 = request.body.property2;
+    renter.property3 = request.body.property3;
+    renter.property4 = request.body.property4;
+    renter.property5 = request.body.property5;
+    renter.trait1 = request.body.trait1;
+    renter.trait2 = request.body.trait2;
+    console.log(request.body);
+
     renter.save(function(err){
         if(err){console.log(err);}
-        response.json({message: "post worked"});
+        response.render("index", {
+            assessmentId: assessmentId
+        });
     });
   });
 

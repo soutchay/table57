@@ -9,16 +9,42 @@
                     data-sap-ui-theme="sap_bluecrystal"></script>
 </head>
 <body id='content' class='sapUiBody'>
-	<p>Hello <%= assessmentId %></p>
+  <style>
+    input{
+      font-size: 20px;
+      font-family: arial;
+    }
+    p{
+      font-size: 20px;
+      font-family: arial;      
+    }
+  </style>
+  <form action='/index' method="post" class="enter">
+    <input type="hidden" name="<%= assessmentId%>">
+    <input type="hidden" name='trait1' class='trait1'>
+    <input type="hidden" name='trait2' class='trait2'>
+    <input type="hidden" name='property1' class='property1'>
+    <input type="hidden" name='property2' class='property2'>
+    <input type="hidden" name='property3' class='property3'>
+    <input type="hidden" name='property4' class='property4'>
+    <input type="hidden" name='property5' class='property5'>
+    <p>Name</p>
+    <input name="name">
+    </br>
+    <p>Description</p>
+    <input name="description">    
+    <button type="submit">Submit Info</button>
+  </form>  
     <div class="assessment"></div>​
     <script>
+      document.getElementsByClassName('enter')[0].style.display = 'inline';
       Traitify.setPublicKey("uhutbgmj5eo4thjdvj1di9j9vp");
       Traitify.setHost("https://api.traitify.com");
       Traitify.setVersion("v1");
       var assessmentId = <%-JSON.stringify(assessmentId)%>;
       console.log(assessmentId);
       Traitify.ui.load(assessmentId, ".assessment");
-	  setTimeout(function(){
+	    setTimeout(function(){
       // if (localStorage.slideIndex == 1){
       document.getElementsByClassName('active')[0].getElementsByClassName('image')[0].style.background = "url(http://airpollution.org.uk/wp-content/uploads/2014/10/Landlord-Insurance.jpg)";
       document.getElementsByClassName('active')[0].getElementsByClassName('image')[0].style.backgroundRepeat = "no-repeat";
@@ -26,21 +52,33 @@
       document.getElementsByClassName('active')[0].getElementsByClassName('caption')[0].innerHTML = "Renter or Landlord";
       document.getElementsByClassName("me")[0].innerHTML = "Renter";
       document.getElementsByClassName("not-me")[0].innerHTML = "Landlord";      
-	  	var notMe = document.getElementsByClassName("not-me")[0];
-	  	console.log(notMe);
+
         document.getElementsByClassName('me')[0].addEventListener("click", function(){
+          if( localStorage.slideIndex ==0){localStorage.property1 = "renter";}
           localStorage.slideIndex ++;
           document.getElementsByClassName("me")[0].innerHTML = "Me";
-          document.getElementsByClassName("not-me")[0].innerHTML = "Not Me";  
-          updateSlide()          
+          document.getElementsByClassName("not-me")[0].innerHTML = "Not Me";
+          updateSlide();
+          if( localStorage.slideIndex == 1 ) {
+            localStorage.property2 = "yes";
+          }
+          if( localStorage.slideIndex == 2 ) {
+            localStorage.property3 = "yes";
+          }
+          if( localStorage.slideIndex == 3 ) {
+            localStorage.property4 = "yes";
+          }
+          if( localStorage.slideIndex == 4 ) {
+            localStorage.property5 = "yes";
+          }                              
         })
         document.getElementsByClassName('not-me')[0].addEventListener("click", function(){
+          if( localStorage.slideIndex ==0){localStorage.property1 = "landlord";}
           localStorage.slideIndex ++;
           document.getElementsByClassName("me")[0].innerHTML = "Me";
-          document.getElementsByClassName("not-me")[0].innerHTML = "Not Me";  
-          updateSlide()
+          document.getElementsByClassName("not-me")[0].innerHTML = "Not Me";
+          updateSlide();
         })
-
       }, 1000);
 
       function updateSlide(){
@@ -60,6 +98,21 @@
           document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.backgroundSize = "cover";
           document.getElementsByClassName('active')[1].getElementsByClassName('caption')[0].innerHTML = "Dog Lover";
         }
+        document.getElementsByClassName('property1')[0].value = localStorage.property1;
+        document.getElementsByClassName('property2')[0].value = localStorage.property2;
+        document.getElementsByClassName('property3')[0].value = localStorage.property3;
+        document.getElementsByClassName('property4')[0].value = localStorage.property4;
+        document.getElementsByClassName('property5')[0].value = localStorage.property5;
+
+        setTimeout(function(){
+          if(document.getElementsByClassName("tf-personality-traits")[0]){
+            document.getElementsByClassName('enter')[0].style.display = 'inline';
+            localStorage.trait1 = document.getElementsByClassName("name")[0].innerHTML;
+//            localStorage.trait2 = document.getElementsByClassName("left-badge-image")[1].src;
+            document.getElementsByClassName("trait1")[0].value = localStorage.trait1;
+            document.getElementsByClassName("trait2")[0].value = localStorage.trait2;      
+          }
+        }, 3000);
       }
 
 	    var page2 = new sap.m.Page('page1', {

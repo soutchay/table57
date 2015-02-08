@@ -10,10 +10,54 @@
     <script src="http://crittercism-html5.s3.amazonaws.com/v2/15/crittercismClientLibraryMin.js"></script>
 </head>
 <body id='content' class='sapUiBody'>
-	<form action='/index' method="post">
-		<input type="hidden" assessmentId="<%= assessmentId%>">
-		<input name="name">
-		<button type="submit">Submit Info</button>
+	<style>
+		body{
+			font-size: 16px;
+			font-family: arial;
+		}
+		h2{
+			font-size: 20px;
+			color: green;
+		}
+		img{
+			width: 80px;
+		}
+		ul {
+			list-style-type: none;
+			padding-left: 10px;
+		}
+		li {
+			border: 2px solid blue;
+			border-radius: 5px;
+			padding-left: 10px;
+		}
+	</style>
+	<% var list = JSON.stringify(data[0]) %>
+	<ul>
+		<% data.forEach(function(data) { %>
+    		<li>
+    			<div class='user-list'>
+    				<h2><%= data.trait1 %></h2>
+    				
+    				<%= data.name %> - <%= data.description %> - <%= data.property1 %>
+    				<% if( data.property2 ){ %>
+						<img src='http://i.imgur.com/mQBnTzJ.png'/>
+    				<% }%>
+    				<% if( data.property3 ){ %>
+						<img src='http://i.imgur.com/4YVP9OT.jpg'/>
+    				<% }%>
+    				<% if( data.property4 ){ %>
+						<img src='http://i.imgur.com/UK9SXmY.jpg?1'/>
+    				<% }%>
+    				<% if( data.property1 == 'landlord' ){ %>
+						<img src='http://airpollution.org.uk/wp-content/uploads/2014/10/Landlord-Insurance.jpg'/>
+    				<% }%>
+    				<a href="mailto:james@someplace.com?Subject=Hello%20again" target="_top">Email</a>
+    			</div>
+    		</li>
+		<% }); %>
+	</ul>
+
     <script>
         var page1 = new sap.m.Page('page1', {
         	title: 'Assessment Selection Page',
@@ -30,7 +74,7 @@
 	        	new sap.m.Button({
 	        		text: 'Landlord',
 	        		press: function(){
-	        			window.location.href = 'http://google.com';
+	        			window.location.href = '/assessment';
         				localStorage.person = 'renter';
 						localStorage.id = <%-JSON.stringify(assessmentId)%>;
 						Crittercism.leaveBreadcrumb("User tapped landord");
