@@ -13,7 +13,7 @@
     <div class="assessment"></div>​
     <script>
       Traitify.setPublicKey("uhutbgmj5eo4thjdvj1di9j9vp");
-      Traitify.setHost("https://api-sandbox.traitify.com");
+      Traitify.setHost("https://api.traitify.com");
       Traitify.setVersion("v1");
       var assessmentId = <%-JSON.stringify(assessmentId)%>;
       console.log(assessmentId);
@@ -41,7 +41,7 @@
           updateSlide()
         })
 
-      }, 600);
+      }, 1000);
 
       function updateSlide(){
         if (localStorage.slideIndex == 1){

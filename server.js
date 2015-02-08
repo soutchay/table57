@@ -71,7 +71,7 @@ app.get('/write', function(req,res) {
 app.use(bodyParser.urlencoded({extend:true}));
 app.use(bodyParser.json());
 
-traitify.setHost("api-sandbox.traitify.com");
+traitify.setHost("api.traitify.com");
 traitify.setVersion("v1");
 traitify.setSecretKey("uhutbgmj5eo4thjdvj1di9j9vp");
 
