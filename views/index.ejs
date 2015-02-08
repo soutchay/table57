@@ -3,8 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<script src="https://cdn.traitify.com/lib/v1.js"></script>
 </head>
 <body>
 	<p>Hello</p>
+    <div class="assessment"></div>​
+    <script>
+      Traitify.setPublicKey("uhutbgmj5eo4thjdvj1di9j9vp");
+      Traitify.setHost("https://api-sandbox.traitify.com");
+      Traitify.setVersion("v1");
+      var assessmentId = 'c2d9fdb9-2a28-45a7-8ff3-bbd8fc8f750b';
+      Traitify.ui.load(assessmentId, ".assessment")
+    </script>​
 </body>
 </html>

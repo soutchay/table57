@@ -22,7 +22,7 @@ var deckId = "super-hero";
 
 traitify.createAssessment(deckId, function(assessment){
     // Use assessment here.
-    console.log(assessment);
+    console.log(assessment.id);
 });
 
 //Views
