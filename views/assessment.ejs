@@ -19,17 +19,48 @@
       console.log(assessmentId);
       Traitify.ui.load(assessmentId, ".assessment");
 	  setTimeout(function(){
+      // if (localStorage.slideIndex == 1){
+      document.getElementsByClassName('active')[0].getElementsByClassName('image')[0].style.background = "url(http://airpollution.org.uk/wp-content/uploads/2014/10/Landlord-Insurance.jpg)";
+      document.getElementsByClassName('active')[0].getElementsByClassName('image')[0].style.backgroundRepeat = "no-repeat";
+      document.getElementsByClassName('active')[0].getElementsByClassName('image')[0].style.backgroundSize = "cover";
+      document.getElementsByClassName('active')[0].getElementsByClassName('caption')[0].innerHTML = "Renter or Landlord";
+      document.getElementsByClassName("me")[0].innerHTML = "Renter";
+      document.getElementsByClassName("not-me")[0].innerHTML = "Landlord";      
 	  	var notMe = document.getElementsByClassName("not-me")[0];
 	  	console.log(notMe);
         document.getElementsByClassName('me')[0].addEventListener("click", function(){
           localStorage.slideIndex ++;
-          console.log("clicked");
+          document.getElementsByClassName("me")[0].innerHTML = "Me";
+          document.getElementsByClassName("not-me")[0].innerHTML = "Not Me";  
+          updateSlide()          
         })
         document.getElementsByClassName('not-me')[0].addEventListener("click", function(){
           localStorage.slideIndex ++;
+          document.getElementsByClassName("me")[0].innerHTML = "Me";
+          document.getElementsByClassName("not-me")[0].innerHTML = "Not Me";  
+          updateSlide()
         })
 
-      }, 1000);
+      }, 600);
+
+      function updateSlide(){
+        if (localStorage.slideIndex == 1){
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.background = "url(http://i.imgur.com/mQBnTzJ.png)";
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.backgroundRepeat = "no-repeat";
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.backgroundSize = "cover";
+          document.getElementsByClassName('active')[1].getElementsByClassName('caption')[0].innerHTML = "Hackathon";
+        }else if(localStorage.slideIndex == 2){
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.background = "url(http://i.imgur.com/4YVP9OT.jpg)";
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.backgroundRepeat = "no-repeat";
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.backgroundSize = "cover";
+          document.getElementsByClassName('active')[1].getElementsByClassName('caption')[0].innerHTML = "Peaceful";
+        }else if(localStorage.slideIndex == 3){
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.background = "url(http://i.imgur.com/UK9SXmY.jpg?1)";
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.backgroundRepeat = "no-repeat";
+          document.getElementsByClassName('active')[1].getElementsByClassName('image')[0].style.backgroundSize = "cover";
+          document.getElementsByClassName('active')[1].getElementsByClassName('caption')[0].innerHTML = "Dog Lover";
+        }
+      }
 
 	    var page2 = new sap.m.Page('page1', {
         	title: 'Assessment Selection Page',
