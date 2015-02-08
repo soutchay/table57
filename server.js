@@ -19,9 +19,10 @@ traitify.setVersion("v1");
 traitify.setSecretKey("uhutbgmj5eo4thjdvj1di9j9vp");
 
 var deckId = "super-hero";
-
+var assessmentId;
 traitify.createAssessment(deckId, function(assessment){
     // Use assessment here.
+    assessmentId = assessment.id;
     console.log(assessment.id);
 });
 
