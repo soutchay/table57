@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
+                    data-sap-ui-libs="sap.m" 
+                    data-sap-ui-theme="sap_bluecrystal"></script>
+    <script>
+
+      
+            
+            var page2 = new sap.m.Page("page2", { title: "I'm a Landlord!", 
+                content: [ 
+                  new sap.m.Image({
+                    src: "images/boo.jpg",
+                    width: "200px",
+                  }),
+                ],
+                showNavButton: true,
+                navButtonTap: function(){
+                   app.back();
+                }
+            });
+       
+
+
+            var page3 = new sap.m.Page("page3", { title: "I'm a Tenant!", 
+                content: [ 
+                  new sap.m.Image({
+                    src: "images/boo.jpg",
+                    width: "200px",
+                  }),
+                ],
+                showNavButton: true,
+                navButtonTap: function(){
+                    app.back();
+                }
+            });
+
+
+            var page1 = new sap.m.Page("page1", { title: "Landlord or Tenant?",
+                content: [
+                  new sap.m.Button({
+                      icon: "{org>avatar_url}",
+                      text: "Landlord",
+                      width: "400px",
+                      press: function() {
+                          app.to("page2");
+                      }
+                  }),
+                new sap.m.Button({
+                    icon: "{org>/avatar_url}",
+                    text: "Tenant",
+                    width: "400px",
+                    press: function() {
+                        app.to("page3");
+                    }
+                }),
+                // new sap.m.Image({
+                //     src: "images/boo.jpg",
+                //     width: "200px",
+                // }),
+               ] 
+            });
+
+
+      var app = new sap.m.App().addPage(page1).addPage(page2).addPage(page3).placeAt("content");
+    </script>
+
+
+  </head>
+  <body id="content" class="sapUiBody">
+
+  </body>
+</html>
