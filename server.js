@@ -83,6 +83,7 @@ traitify.createAssessment(deckId, function(assessment){
     console.log(assessment.id);
 });
 
+
 //Views
 app.set("view engine", 'ejs');
 
@@ -117,6 +118,14 @@ router.route("/assessment")
     .get(function(req, res){
         res.status(200).render("assessment", {
             assessmentId: assessmentId
+        });
+        traitify.getSlides(assessmentId, function(assessment){
+            // Use assessment here.
+            console.log(assessment);
+        });
+        traitify.getPersonalityTypes(assessmentId, function(assessment){
+            // Use assessment here.
+            console.log(assessment);
         });
     });
 
