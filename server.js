@@ -30,7 +30,10 @@ api.connect(function(response) {
 });
 // Setup default/home route
 app.get('/', function(req,res) {
-    res.send("<div><form action='/write'><label>Enter your name:</label><input type='text' name='name'/><input type='submit'></input></form></div>");
+    res.send("<div><form action='/write'>" +
+        "<label>Enter your name:</label>" +
+        "+<input type='text' name='name'/>" +
+        "<input type='submit'></input></form></div>");
 });
 // Setup write route
 app.get('/write', function(req,res) {
@@ -94,7 +97,9 @@ router.route("/renter")
     Renter.find(function(error, data){
         if(error) {console.log(error);}
         console.log(data);
-        response.status(200).render("index");
+        response.status(200).render("index", {
+            assessmentId: assessmentId
+        });
         // response.render('index');
     });
   })
