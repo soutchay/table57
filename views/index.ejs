@@ -4,24 +4,50 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script src="https://cdn.traitify.com/lib/v1.js"></script>
+	<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
+                    data-sap-ui-libs="sap.m" 
+                    data-sap-ui-theme="sap_bluecrystal"></script>
+    <script src="http://crittercism-html5.s3.amazonaws.com/v2/15/crittercismClientLibraryMin.js"></script>
 </head>
-<body>
-	<p>Hello <%= assessmentId %></p>
-	<a href="/assessment"><button>Landlord</button></a>
-	<a href="/assessment"><button>Tenant</button></a>
+<body id='content' class='sapUiBody'>
+	<form action='/index' method="post">
+		<input type="hidden" assessmentId="<%= assessmentId%>">
+		<input name="name">
+		<button type="submit">Submit Info</button>
     <script>
-        document.getElementsByTagName('button')[0].addEventListener('click', landlordPath);
-        document.getElementsByTagName('button')[1].addEventListener('click', renterPath);
-        function landlordPath(){
-            window.location.href = "/assessment";
-            localStorage.person = 'landlord';
-            localStorage.id = <%-JSON.stringify(assessmentId)%>;
-        }
-        function renterPath(){
-        	window.location.href = 'http://google.com';
-        	localStorage.person = 'renter';
-			localStorage.id = <%-JSON.stringify(assessmentId)%>;
-        }
+        var page1 = new sap.m.Page('page1', {
+        	title: 'Assessment Selection Page',
+        	content: [
+	        	new sap.m.Button({
+	        		text: 'Renter',
+	        		press: function(){
+	        			window.location.href = "/assessment";
+            			localStorage.person = 'landlord';
+            			localStorage.id = <%-JSON.stringify(assessmentId)%>;
+            			Crittercism.leaveBreadcrumb("User tapped renter");
+	        		}
+	        	}),
+	        	new sap.m.Button({
+	        		text: 'Landlord',
+	        		press: function(){
+	        			window.location.href = 'http://google.com';
+        				localStorage.person = 'renter';
+						localStorage.id = <%-JSON.stringify(assessmentId)%>;
+						Crittercism.leaveBreadcrumb("User tapped landord");
+					}
+	        	})
+        	]
+        });
+        var app = sap.m.App().addPage(page1).placeAt('content');
     </script>​
+    <script>
+      $(document).ready(function() {
+        Crittercism.init({
+          appId: '54d7b0a351de5e9f042ed804', // Example: 47cc67093475061e3d95369d
+          appVersion: '1.0', // Developer-provided application version
+        });
+      });
+      localStorage.slideIndex = 0;
+    </script>    
 </body>
 </html>

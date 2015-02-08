@@ -4,21 +4,40 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script src="https://cdn.traitify.com/lib/v1.js"></script>
+	<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
+                    data-sap-ui-libs="sap.m" 
+                    data-sap-ui-theme="sap_bluecrystal"></script>
 </head>
-<body>
+<body id='content' class='sapUiBody'>
 	<p>Hello <%= assessmentId %></p>
     <div class="assessment"></div>​
     <script>
       Traitify.setPublicKey("uhutbgmj5eo4thjdvj1di9j9vp");
       Traitify.setHost("https://api-sandbox.traitify.com");
       Traitify.setVersion("v1");
-      // var assessmentId = 'c2d9fdb9-2a28-45a7-8ff3-bbd8fc8f750b';
       var assessmentId = <%-JSON.stringify(assessmentId)%>;
       console.log(assessmentId);
       Traitify.ui.load(assessmentId, ".assessment");
 	  setTimeout(function(){
 	  	var notMe = document.getElementsByClassName("not-me")[0];
-	  	console.log(notMe);}, 500); 
+	  	console.log(notMe);
+        document.getElementsByClassName('me')[0].addEventListener("click", function(){
+          localStorage.slideIndex ++;
+          console.log("clicked");
+        })
+        document.getElementsByClassName('not-me')[0].addEventListener("click", function(){
+          localStorage.slideIndex ++;
+        })
+
+      }, 1000);
+
+	    var page2 = new sap.m.Page('page1', {
+        	title: 'Assessment Selection Page',
+        	content: [
+
+        	]
+        });
+        var app = sap.m.App().addPage(page2).placeAt('content');
     </script>​
 </body>
 </html>

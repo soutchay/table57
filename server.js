@@ -75,7 +75,7 @@ traitify.setHost("api-sandbox.traitify.com");
 traitify.setVersion("v1");
 traitify.setSecretKey("uhutbgmj5eo4thjdvj1di9j9vp");
 
-var deckId = "super-hero";
+var deckId = "core";
 var assessmentId;
 traitify.createAssessment(deckId, function(assessment){
     // Use assessment here.
@@ -107,7 +107,8 @@ router.route("/index")
   .post(function(request, response){
     console.log(request);
     var renter = new Renter();
-    renter.name = "brian";
+    renter.name = request.body.name;
+    renter.assessmentId = request.body.assessmentId;
     renter.save(function(err){
         if(err){console.log(err);}
         response.json({message: "post worked"});
