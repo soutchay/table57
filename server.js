@@ -4,7 +4,8 @@ var app			= express();
 var bodyParser	= require('body-parser');
 var mongoose	= require('mongoose');
 var traitify    = require('traitify');
-var Renter = require('./app/models/renter');
+var Renter      = require('./app/models/renter');
+var path        = require('path');
 
 //Connect to the database
 mongoose.connect('mongodb://brian:mongo@ds039441.mongolab.com:39441/briansdatabase');
@@ -27,17 +28,20 @@ traitify.createAssessment(deckId, function(assessment){
 //Views
 app.set("view engine", 'ejs');
 
+app.use(express.static(path.join(__dirname, '/views')));
 
 //Routers
 var router      = express.Router();
+
 
 router.route("/renter")
   .get(function(request, response){
     Renter.find(function(error, data){
         if(error) {console.log(error);}
-        response.status(200).json(data);
+        console.log(data);
+        response.status(200).render("index");
+        // response.render('index');
     });
-    response.render('./views')
   })
   .post(function(request, response){
     console.log(request);
@@ -48,7 +52,6 @@ router.route("/renter")
         response.json({message: "post worked"});
     });
   });
-
 
 app.use(router);
 //Set port to 8080
