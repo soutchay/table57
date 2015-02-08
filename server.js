@@ -13,53 +13,53 @@ mongoose.connect('mongodb://brian:mongo@ds039441.mongolab.com:39441/briansdataba
 //////////////////////
 ////SETUP Aerospike
 /////////////////////
-var http = require('http');
-var api = require('./api');
-var dbStatusCode = null;
-// Establish connection to the cluster
-api.connect(function(response) {
-    dbStatusCode = response;
-    if ( dbStatusCode === 0) {
-        // handle success
-        console.log("Connection to Aerospike cluster succeeded!");
-    }
-    else {
-        // handle failure
-        console.log("Connection to Aerospike cluster failed!");
-    }
-});
-// Setup default/home route
-app.get('/', function(req,res) {
-    res.send("<div><form action='/write'>" +
-        "<label>Enter your name:</label>" +
-        "+<input type='text' name='name'/>" +
-        "<input type='submit'></input></form></div>");
-});
-// Setup write route
-app.get('/write', function(req,res) {
-    if (dbStatusCode === 0) {
-        api.writeRecord('Hello',req.query.name, function(response) {
-            if ( response.status === 0) {
-                // handle success
-                api.readRecord('Hello', function(response) {
-                    if ( response.status === 0) {
-                        // handle success
-                    }
-                    else {
-                        // handle failure
-                    }
-                    res.send(response.message);
-                });
-            }
-            else {
-                // handle failure
-                res.send(response.message);
-            }
-        });
-    } else  {
-        res.send("Connection to Aerospike cluster failed!");
-    }
-});
+// var http = require('http');
+// var api = require('./api');
+// var dbStatusCode = null;
+// // Establish connection to the cluster
+// api.connect(function(response) {
+//     dbStatusCode = response;
+//     if ( dbStatusCode === 0) {
+//         // handle success
+//         console.log("Connection to Aerospike cluster succeeded!");
+//     }
+//     else {
+//         // handle failure
+//         console.log("Connection to Aerospike cluster failed!");
+//     }
+// });
+// // Setup default/home route
+// app.get('/', function(req,res) {
+//     res.send("<div><form action='/write'>" +
+//         "<label>Enter your name:</label>" +
+//         "+<input type='text' name='name'/>" +
+//         "<input type='submit'></input></form></div>");
+// });
+// // Setup write route
+// app.get('/write', function(req,res) {
+//     if (dbStatusCode === 0) {
+//         api.writeRecord('Hello',req.query.name, function(response) {
+//             if ( response.status === 0) {
+//                 // handle success
+//                 api.readRecord('Hello', function(response) {
+//                     if ( response.status === 0) {
+//                         // handle success
+//                     }
+//                     else {
+//                         // handle failure
+//                     }
+//                     res.send(response.message);
+//                 });
+//             }
+//             else {
+//                 // handle failure
+//                 res.send(response.message);
+//             }
+//         });
+//     } else  {
+//         res.send("Connection to Aerospike cluster failed!");
+//     }
+// });
 
 ///////////////////
 
