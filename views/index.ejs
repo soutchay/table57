@@ -7,15 +7,19 @@
 </head>
 <body>
 	<p>Hello <%= assessmentId %></p>
-    <div class="assessment"></div>​
+	<button>Landlord</button>
+	<button>Tenant</button>
     <script>
-      Traitify.setPublicKey("uhutbgmj5eo4thjdvj1di9j9vp");
-      Traitify.setHost("https://api-sandbox.traitify.com");
-      Traitify.setVersion("v1");
-      // var assessmentId = 'c2d9fdb9-2a28-45a7-8ff3-bbd8fc8f750b';
-      var assessmentId = <%-JSON.stringify(assessmentId)%>;
-      console.log(assessmentId);
-      Traitify.ui.load(assessmentId, ".assessment")
+        document.getElementsByTagName('button')[0].addEventListener('click', landlordPath);
+        document.getElementsByTagName('button')[1].addEventListener('click', renterPath);
+        function landlordPath(){
+            window.location.href = 'http://google.com';
+            localStorage.person = 'landlord';
+        }
+        function renterPath(){
+        	window.location.href = 'http://google.com';
+        	localStorage.person = 'renter';
+        }
     </script>​
 </body>
 </html>
