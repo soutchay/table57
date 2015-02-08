@@ -92,7 +92,7 @@ app.use(express.static(path.join(__dirname, '/views')));
 var router      = express.Router();
 
 
-router.route("/renter")
+router.route("/index")
   .get(function(request, response){
     Renter.find(function(error, data){
         if(error) {console.log(error);}
@@ -112,6 +112,14 @@ router.route("/renter")
         response.json({message: "post worked"});
     });
   });
+
+router.route("/assessment")
+    .get(function(req, res){
+        res.status(200).render("assessment", {
+            assessmentId: assessmentId
+        });
+    });
+
 
 app.use(router);
 //Set port to 8080

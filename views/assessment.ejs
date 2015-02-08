@@ -15,7 +15,10 @@
       // var assessmentId = 'c2d9fdb9-2a28-45a7-8ff3-bbd8fc8f750b';
       var assessmentId = <%-JSON.stringify(assessmentId)%>;
       console.log(assessmentId);
-      Traitify.ui.load(assessmentId, ".assessment")
+      Traitify.ui.load(assessmentId, ".assessment");
+	  setTimeout(function(){
+	  	var notMe = document.getElementsByClassName("not-me")[0];
+	  	console.log(notMe);}, 500); 
     </script>​
 </body>
 </html>

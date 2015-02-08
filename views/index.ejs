@@ -7,18 +7,20 @@
 </head>
 <body>
 	<p>Hello <%= assessmentId %></p>
-	<button>Landlord</button>
-	<button>Tenant</button>
+	<a href="/assessment"><button>Landlord</button></a>
+	<a href="/assessment"><button>Tenant</button></a>
     <script>
         document.getElementsByTagName('button')[0].addEventListener('click', landlordPath);
         document.getElementsByTagName('button')[1].addEventListener('click', renterPath);
         function landlordPath(){
-            window.location.href = 'http://google.com';
+            window.location.href = "/assessment";
             localStorage.person = 'landlord';
+            localStorage.id = <%-JSON.stringify(assessmentId)%>;
         }
         function renterPath(){
         	window.location.href = 'http://google.com';
         	localStorage.person = 'renter';
+			localStorage.id = <%-JSON.stringify(assessmentId)%>;
         }
     </script>​
 </body>
